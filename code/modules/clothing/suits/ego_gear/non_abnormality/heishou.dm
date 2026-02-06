@@ -41,11 +41,14 @@
 
 /obj/item/clothing/suit/armor/ego_gear/city/heishou/serpent/equipped(mob/user, slot)
 	. = ..()
-	var/mob/living/carbon/human/si = user
-	og_eye_color = si.eye_color //Saving Eye Color for changing it back later on
-	to_chat(si, "The Og eye color is [og_eye_color] taken from your og Eye-Color: [si.eye_color]")
-	to_chat(si, span_hierophant("The Boluses are taking effect, your eyes are changing to be serpentine"))
-	si.eye_color = sanitize_hexcolor("#be2cfb")
+	if(slot == ITEM_SLOT_OCLOTHING && ishuman(user))
+		var/mob/living/carbon/human/si = user
+		og_eye_color = si.eye_color //Saving Eye Color for changing it back later on
+		to_chat(si, "The Og eye color is [og_eye_color] taken from your og Eye-Color: [si.eye_color]")
+		to_chat(si, span_hierophant("The Boluses are taking effect, your eyes are changing to be serpentine"))
+		si.eye_color = sanitize_hexcolor("#be2cfb")
+		si.regenerate_icons()
+		si.update_body()
 
 
 /obj/item/clothing/suit/armor/ego_gear/city/heishou/serpent/dropped(mob/user)
@@ -53,3 +56,5 @@
 	var/mob/living/carbon/human/si = user
 	to_chat(si, span_alert("The Boluses wither away as you take off your suit. Your eyes return to normal"))
 	si.eye_color = og_eye_color
+	si.regenerate_icons()
+	si.update_body()
