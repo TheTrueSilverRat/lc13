@@ -43,8 +43,9 @@
 	. = ..()
 	var/mob/living/carbon/human/si = user
 	og_eye_color = si.eye_color //Saving Eye Color for changing it back later on
+	to_chat(si "The Og eye color is [og_eye_color] taken from your og Eye-Color: [si.eye_color]")
 	to_chat(si, span_hierophant("The Boluses are taking effect, your eyes are changing to be serpentine"))
-	si.eye_color = "#be2cfb"
+	si.eye_color = "be2cfb"
 
 
 /obj/item/clothing/suit/armor/ego_gear/city/heishou/serpent/dropped(mob/user)
